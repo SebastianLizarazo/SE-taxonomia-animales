@@ -14,7 +14,7 @@ class FeatureDefinition:
     label: str
     category: str
 
-
+# Catalogo de rasgos disponibles en la base de conocimiento.
 FEATURE_CATALOG: List[FeatureDefinition] = [
     FeatureDefinition("vertebrate", "Es vertebrado", "Nucleo Mammalia"),
     FeatureDefinition("endothermic", "Presenta endotermia", "Nucleo Mammalia"),
@@ -45,8 +45,10 @@ FEATURE_CATALOG: List[FeatureDefinition] = [
     FeatureDefinition("ectothermic", "Regulacion ectotermica", "Rasgos contradictorios"),
 ]
 
+# Mapeo de clave a etiqueta para facilitar visualizacion en la interfaz.
 FEATURE_LABELS: Dict[str, str] = {feature.key: feature.label for feature in FEATURE_CATALOG}
 
+# Requisitos de evidencia para cada regla de inferencia en el motor.
 RULE_REQUIREMENTS: Dict[str, List[str]] = {
     "Mammalia": ["vertebrate", "endothermic", "body_hair", "viviparous"],
     "Carnivora": ["carnivorous_diet", "carnassial_dentition", "predatory_behavior"],
@@ -57,6 +59,7 @@ RULE_REQUIREMENTS: Dict[str, List[str]] = {
     "Lynx lynx": ["ear_tufts", "short_tail", "temperate_forest_habitat"],
 }
 
+# Mensajes de error para cada tipo de contradiccion detectada por reglas.
 CONTRADICTION_MESSAGES: Dict[str, str] = {
     "claws_conflict": "Conflicto: se marcaron garras retractiles y no retractiles.",
     "reproduction_conflict": "Conflicto: se marcaron reproduccion vivipara y ovipara.",
@@ -81,7 +84,7 @@ X: Any
 _RULES_INITIALIZED = False
 _ACTIVE_FACTS = set()
 
-
+# Inicializacion de reglas de inferencia y contradiccion para el dominio Felidae.
 def _initialize_rules() -> None:
     global _RULES_INITIALIZED
 
